@@ -24,11 +24,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
         run: |
-          gh repo list  --limit 200 --fork --json nameWithOwner
+          gh repo list ${{ github.repository_owner }} --limit 200 --fork --json nameWithOwner
   
       - name: sync-fork
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
         run: |
-          gh repo list  --limit 200 --fork --json nameWithOwner  --jq '.[].nameWithOwner' | xargs -n1  gh repo sync
+          gh repo list ${{ github.repository_owner }} --limit 200 --fork --json nameWithOwner  --jq '.[].nameWithOwner' | xargs -n1  gh repo sync
 
